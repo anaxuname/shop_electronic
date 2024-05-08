@@ -80,7 +80,7 @@ WSGI_APPLICATION = "shop_electronic.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "spa-project",
+        "NAME": "shop_electronic",
         "USER": "postgres",
         "PASSWORD": env("POSTGRES_PASSWORD"),
     }
