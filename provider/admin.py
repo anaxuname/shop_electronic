@@ -6,7 +6,7 @@ from django.db.models import QuerySet
 @admin.register(Provider)
 class ProviderAdmin(admin.ModelAdmin):
     list_display = ("name", "provider_type", "parent_provider", "dept")
-    list_filter = ("provider_type",)
+    list_filter = ("provider_type", "contact__city")
     actions = ["dept_clear"]
 
     @admin.action(description="Clear dept")
@@ -15,6 +15,6 @@ class ProviderAdmin(admin.ModelAdmin):
 
 
 @admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(admin.ModelAdmin):  # TODO: make inline
     list_display = ("email", "country", "city", "street", "home")
     list_filter = ("city",)
