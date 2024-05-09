@@ -1,4 +1,9 @@
-# from rest_framework import generics
+from .models import Provider
+from rest_framework.viewsets import ModelViewSet
+from .serializers import ProviderSerializer
+from .permissions import IsStaff
 
 
-# Create your views here.
+class ProviderViewSet(ModelViewSet):
+    serializer_class = ProviderSerializer
+    queryset = Provider.objects.all()
