@@ -78,9 +78,7 @@ class Product(models.Model):
     model_product = models.CharField(
         max_length=100, verbose_name="Model product"
     )
-    date_reliease = models.DateField(
-        auto_now=True, verbose_name="Date release"
-    )
+    date_release = models.DateField(auto_now=True, verbose_name="Date release")
     provider = models.ForeignKey(
         Provider, on_delete=models.CASCADE, verbose_name="Provider"
     )
