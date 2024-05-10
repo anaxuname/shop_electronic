@@ -3,6 +3,10 @@ from .models import Provider, Contact
 
 
 class ContactSerializer(ModelSerializer):
+    """
+    Serializer for contact
+    """
+
     class Meta:
         model = Contact
         fields = [
@@ -15,10 +19,18 @@ class ContactSerializer(ModelSerializer):
 
 
 class ProviderSerializer(ModelSerializer):
+    """
+    Serializer for provider
+    """
+
     contact = ContactSerializer(many=False)
 
     class Meta:
         model = Provider
+        read_only_fields = [
+            "dept",
+        ]
+
         fields = [
             "id",
             "name",
@@ -29,12 +41,19 @@ class ProviderSerializer(ModelSerializer):
         ]
 
     def create(self, validated_data):
+        """
+        Create provider and contact
+        """
         contact = validated_data.pop("contact")
         provider = Provider.objects.create(**validated_data)
         Contact.objects.create(**contact, provider=provider)
         return provider
 
     def update(self, instance, validated_data):
-        contact = validated_data.pop("contact")
-        Contact.objects.filter(provider=instance).update(**contact)
+        """
+        Update provider and contact except dept
+        """
+        if "contact" in validated_data:
+            contact = validated_data.pop("contact")
+            Contact.objects.filter(provider=instance).update(**contact)
         return super().update(instance, validated_data)
