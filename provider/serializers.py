@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from provider.validators import ProviderTypeValidator
 from .models import Provider, Contact
 
 
@@ -39,6 +40,7 @@ class ProviderSerializer(ModelSerializer):
             "contact",
             "dept",
         ]
+        validators = [ProviderTypeValidator]
 
     def create(self, validated_data):
         """
