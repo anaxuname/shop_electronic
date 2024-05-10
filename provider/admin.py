@@ -3,7 +3,7 @@ from provider.models import Provider, Contact, Product
 from django.db.models import QuerySet
 
 
-class ContactInline(admin.TabularInline):
+class ContactInline(admin.StackedInline):
     """
     Panel for contact in provider admin
     """
