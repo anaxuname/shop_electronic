@@ -8,6 +8,10 @@ class ProviderType(models.IntegerChoices):
 
 
 class Provider(models.Model):
+    """
+    Model for provider
+    """
+
     name = models.CharField(
         max_length=100, unique=True, verbose_name="Provider"
     )
@@ -42,6 +46,10 @@ class Provider(models.Model):
 
 
 class Contact(models.Model):
+    """
+    Model for contact
+    """
+
     email = models.EmailField(max_length=100, verbose_name="Email")
     country = models.CharField(max_length=50, verbose_name="Country")
     city = models.CharField(max_length=50, verbose_name="City")
@@ -59,3 +67,27 @@ class Contact(models.Model):
     class Meta:
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
+
+
+class Product(models.Model):
+    """
+    Model for product
+    """
+
+    name = models.CharField(max_length=100, verbose_name="Product")
+    model_product = models.CharField(
+        max_length=100, verbose_name="Model product"
+    )
+    date_reliease = models.DateField(
+        auto_now=True, verbose_name="Date release"
+    )
+    provider = models.ForeignKey(
+        Provider, on_delete=models.CASCADE, verbose_name="Provider"
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
